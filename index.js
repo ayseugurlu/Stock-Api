@@ -23,6 +23,10 @@ require("express-async-errors");
 const { dbConnection } = require("./src/configs/dbConnection");
 dbConnection();
 
+// CORS:
+const cors = require("cors");
+app.use(cors({ origin: "http://localhost:5173" }));
+
 /* ------------------------------------------------------- */
 // Middlewares:
 
@@ -61,6 +65,14 @@ app.all("/", (req, res) => {
 // Routes:
 app.use(require("./src/routes"));
 
+// Not Found
+app.use("*", (req, res) => {
+  res.status(404).json({
+    error: true,
+    message: "404 Not Found",
+  });
+});
+
 /* ------------------------------------------------------- */
 
 // errorHandler:
@@ -71,4 +83,4 @@ app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
-// require("./src/helpers/sync")(); // !!! It clear database.
+// require('./src/helpers/sync')() // !!! It clear database.
