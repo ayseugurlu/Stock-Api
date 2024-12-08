@@ -22,7 +22,10 @@ module.exports = {
             `
         */
 
-    const data = await res.getModelList(Product);
+    const data = await res.getModelList(Product, {}, [
+      { path: "categoryId", select: "name -_id" },
+      { path: "brandId", select: "name -_id" },
+    ]);
 
     res.status(200).send({
       error: false,
@@ -38,11 +41,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "productname": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                    $ref: "#/definitions/Product"
                 }
             }
         */
@@ -61,7 +60,10 @@ module.exports = {
             #swagger.summary = "Read Product"
         */
 
-    const data = await Product.findOne({ _id: req.params.id });
+    const data = await Product.findOne({ _id: req.params.id }).populate([
+      { path: "categoryId", select: "name" },
+      { path: "brandId", select: "name" },
+    ]);
 
     res.status(200).send({
       error: false,
@@ -77,11 +79,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "productname": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                     $ref: "#/definitions/Product"
                 }
             }
         */

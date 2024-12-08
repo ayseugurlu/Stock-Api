@@ -9,11 +9,11 @@ const router = require("express").Router();
 // URL: /
 
 // // auth:
-// router.use('/auth', require('./auth'))
+router.use("/auth", require("./auth"));
 // user:
 router.use("/users", require("./user"));
 // // token:
-// router.use('/tokens', require('./token'))
+router.use("/tokens", require("./token"));
 
 // // brand:
 router.use("/brands", require("./brand"));

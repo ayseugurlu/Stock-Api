@@ -22,7 +22,12 @@ module.exports = {
             `
         */
 
-    const data = await res.getModelList(Purchase);
+    const data = await res.getModelList(Purchase, {}, [
+      { path: "firmId", select: "name -_id" },
+      { path: "brandId", select: "name _id" },
+      { path: "productId", select: "name -_id" },
+      { path: "userId", select: "username -_id" },
+    ]);
 
     res.status(200).send({
       error: false,
@@ -38,14 +43,13 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "purchasename": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                   $ref: "#/definitions/Purchase"
                 }
             }
         */
+
+    //set userId from logged in user:
+    req.body.userId = req.user._id;
 
     const data = await Purchase.create(req.body);
 
@@ -61,7 +65,12 @@ module.exports = {
             #swagger.summary = "Read Purchase"
         */
 
-    const data = await Purchase.findOne({ _id: req.params.id });
+    const data = await Purchase.findOne({ _id: req.params.id }).populate([
+      { path: "firmId", select: "name -_id" },
+      { path: "brandId", select: "name -_id" },
+      { path: "productId", select: "name -_id" },
+      { path: "userId", select: "username -_id" },
+    ]);
 
     res.status(200).send({
       error: false,
@@ -77,11 +86,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "purchasename": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                    $ref: "#/definitions/Purchase"
                 }
             }
         */

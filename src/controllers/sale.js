@@ -22,7 +22,11 @@ module.exports = {
             `
         */
 
-    const data = await res.getModelList(Sale);
+    const data = await res.getModelList(Sale, {}, [
+      { path: "brandId", select: "name -_id" },
+      { path: "productId", select: "name -_id" },
+      { path: "userId", select: "username -_id" },
+    ]);
 
     res.status(200).send({
       error: false,
@@ -38,11 +42,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "salename": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                     $ref: "#/definitions/Sale"
                 }
             }
         */
@@ -61,7 +61,11 @@ module.exports = {
             #swagger.summary = "Read Sale"
         */
 
-    const data = await Sale.findOne({ _id: req.params.id });
+    const data = await Sale.findOne({ _id: req.params.id }).populate([
+      { path: "brandId", select: "name -_id" },
+      { path: "productId", select: "name -_id" },
+      { path: "userId", select: "username -_id" },
+    ]);
 
     res.status(200).send({
       error: false,
@@ -77,11 +81,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "salename": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                     $ref: "#/definitions/Sale"
                 }
             }
         */

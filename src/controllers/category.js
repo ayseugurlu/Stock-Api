@@ -38,11 +38,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "categoryname": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                     $ref: "#/definitions/Category"
                 }
             }
         */
@@ -77,11 +73,7 @@ module.exports = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "categoryname": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                    $ref: "#/definitions/Category"
                 }
             }
         */

@@ -48,7 +48,7 @@ app.use(require("./src/middlewares/queryHandler"));
 app.all("/", (req, res) => {
   res.send({
     error: false,
-    message: "Welcome to Stock Management APIgsertjnsr",
+    message: "Welcome to Stock Management API",
     documents: {
       swagger: "/documents/swagger",
       redoc: "/documents/redoc",
@@ -71,4 +71,4 @@ app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
-// require('./src/helpers/sync')() // !!! It clear database.
+// require("./src/helpers/sync")(); // !!! It clear database.
