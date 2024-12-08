@@ -25,7 +25,10 @@ module.exports = {
             `
         */
 
-    const data = await res.getModelList(User);
+    // can list just self Data
+    const customFilters = req.user?.isAdmin ? {} : { _id: req.user._id };
+
+    const data = await res.getModelList(User, customFilters);
 
     res.status(200).send({
       error: false,

@@ -40,6 +40,89 @@
     "application/json"
   ],
   "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "description": "Login with username (or email) and password for get simpleToken and JWT",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "aA?123456"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Refresh",
+        "description": "Refresh with   for get accessToken",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bearer": {
+                  "type": "object",
+                  "properties": {
+                    "refresh": {
+                      "type": "string",
+                      "example": "...refresh_token..."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "simpleToken: Logout",
+        "description": "Delete token key.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/users/": {
       "get": {
         "tags": [
@@ -268,29 +351,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "brandname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Brand"
             }
           }
         ],
@@ -340,35 +401,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "brandname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Brand"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -413,35 +452,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "brandname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Brand"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       }
@@ -471,29 +488,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "categoryname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Category"
             }
           }
         ],
@@ -543,29 +538,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "categoryname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Category"
             }
           }
         ],
@@ -616,29 +589,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "categoryname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Category"
             }
           }
         ],
@@ -674,29 +625,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "firmname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Firm"
             }
           }
         ],
@@ -746,29 +675,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "firmname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Firm"
             }
           }
         ],
@@ -819,29 +726,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "firmname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Firm"
             }
           }
         ],
@@ -877,29 +762,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "productname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Product"
             }
           }
         ],
@@ -949,29 +812,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "productname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Product"
             }
           }
         ],
@@ -1022,29 +863,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "productname": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Product"
             }
           }
         ],
@@ -1080,29 +899,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "purchasename": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Purchase"
             }
           }
         ],
@@ -1152,29 +949,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "purchasename": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Purchase"
             }
           }
         ],
@@ -1225,29 +1000,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "purchasename": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Purchase"
             }
           }
         ],
@@ -1283,29 +1036,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "salename": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Sale"
             }
           }
         ],
@@ -1321,7 +1052,7 @@
         "tags": [
           "Sales"
         ],
-        "summary": "Read Sale",
+        "summary": "Get Single Sale",
         "description": "",
         "parameters": [
           {
@@ -1355,35 +1086,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "salename": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Sale"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       },
@@ -1428,35 +1137,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "salename": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "test@site.com"
-                },
-                "firstName": {
-                  "type": "string",
-                  "example": "test"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "test"
-                }
-              }
+              "$ref": "#/definitions/Sale"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted"
           }
         }
       }

@@ -82,7 +82,7 @@ module.exports = {
       runValidators: true,
     });
 
-    res.status(200).send({
+    res.status(202).send({
       error: false,
       data,
       new: await Brand.findOne({ _id: req.params.id }),
