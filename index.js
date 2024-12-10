@@ -24,8 +24,8 @@ const { dbConnection } = require("./src/configs/dbConnection");
 dbConnection();
 
 // CORS:
-// const cors = require("cors");
-// app.use(cors({ origin: "http://localhost:5173" }));
+const cors = require("cors");
+app.use(cors({ origin: "http://localhost:5173" }));
 
 /* ------------------------------------------------------- */
 // Middlewares:
