@@ -41,7 +41,7 @@ const purchaseSchema = new mongoose.Schema(
       required: true,
     },
 
-    amaount: {
+    amount: {
       type: Number,
       default: function () {
         return this.price * this.quantity;
